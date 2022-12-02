@@ -1,9 +1,0 @@
-site_name: BitterBuster Documentation
-theme:
-  name: null
-  custom_dir: 'cinder'
-  hljs_languages:
-    - json
-nav:
-  - Home: index.md
-  - Data: data.md
