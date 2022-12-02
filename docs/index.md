@@ -5,4 +5,7 @@
 layout: home
 ---
 
-Use the navbar above to view different pages.
+* TOC
+{:toc}
+
+[Data Documentation](/data)

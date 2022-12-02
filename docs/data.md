@@ -4,10 +4,8 @@ title: Data
 permalink: /data/
 ---
 
-<nav class="toc-fixed" markdown="1">
 * TOC
 {:toc}
-</nav>
 
 # BitterBuster Data Documentation
 ## Overview
