@@ -1,16 +1,13 @@
 # BitterBuster-Documentation
 
 ## Local Development
-Install Ruby, then run:
+Install python, then run
 ```
-cd docs
-gem install jekyll bundler
+pip install mkdocs
 ```
-
-Run `bundle` to install other packages for your project.
 
 To run the development server:
 ```
-bundle exec jekyll serve
+mkdocs serve
 ```
-And navigate to [http://localhost:4000](http://localhost:4000)
+And navigate to [http://localhost:8000](http://localhost:8000)

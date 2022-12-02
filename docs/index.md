@@ -1,11 +1,3 @@
----
-# Feel free to add content and custom Front Matter to this file.
-# To modify the layout, see https://jekyllrb.com/docs/themes/#overriding-theme-defaults
+# Welcome to the BitterBuster Documentation!
 
-layout: home
----
-
-* TOC
-{:toc}
-
-[Data Documentation](/data)
+Use the navbar above to navigate between pages

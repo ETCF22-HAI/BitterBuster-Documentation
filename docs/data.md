@@ -1,11 +1,6 @@
 ---
-layout: page
-title: Data
-permalink: /data/
+title: Data Documentation
 ---
-
-* TOC
-{:toc}
 
 # BitterBuster Data Documentation
 ## Overview
@@ -15,12 +10,12 @@ This document provides the details and schema for the various data elements expo
 With each run of the game, data points are logged for each specific event that occurs within the gameplay. These are exported into a `json` file in the `Logs` directory created at the root working directory of the BitterBuster executable. The event log is an array of logging objects that each follow the general form:
 ```
 {
-  eventType: string,
-  timeStamp: float,
-  data: [
+  "eventType": string,
+  "timeStamp": float,
+  "data": [
     {
-      key: string,
-      value: string
+      "key": string,
+      "value": string
     },
     ...
   ]
@@ -32,9 +27,9 @@ Each different event is associated with a different set of key/value data pairs 
 *Note:* Logging was written very early in development and hasn't been updated. The data array was used to bypass an earlier problem with logging, but each of them will be compressed to just be within the log event object itself as such:
 ```
 {
-  eventType: string,
-  timeStamp: float,
-  key: value,
+  "eventType": string,
+  "timeStamp": float,
+  "key": value,
   ...
 }
 ```
@@ -47,9 +42,9 @@ Logging of Explorer position by the game every x seconds (current build sets thi
 
 ```
 {
-  eventType: "Explorer Position",
-  timeStamp: float,
-  position: Vector3 // (x, y, z) position
+  "eventType": "Explorer Position",
+  "timeStamp": float,
+  "position": Vector3 // (x, y, z) position
 }
 ```
 
@@ -58,8 +53,8 @@ Logging of when the Explorer enters a neighborhood
 
 ```
 {
-  eventType: "Enter Neighborhood",
-  timeStamp: float
+  "eventType": "Enter Neighborhood",
+  "timeStamp": float
 }
 ```
 
@@ -68,8 +63,8 @@ Logging of when the Explorer leaves a neighborhood
 
 ```
 {
-  eventType: "Exit Neighborhood",
-  timeStamp: float
+  "eventType": "Exit Neighborhood",
+  "timeStamp": float
 }
 ```
 
@@ -78,9 +73,9 @@ Logging of when the Explorer visits (interacts with) a House.
 
 ```
 {
-  eventType: "Visited House",
-  timeStamp: float,
-  houseBitterProb: float	// Probability of bitterness for given house
+  "eventType": "Visited House",
+  "timeStamp": float,
+  "houseBitterProb": float	// Probability of bitterness for given house
 }
 ```
 
@@ -89,9 +84,9 @@ Logging of when a Candy is displayed to the Selector
 
 ```
 {
-  eventType: "Displayed Candy",
-  timeStamp: float,
-  selectedCandy: string // Name of the png file for the selected candy
+  "eventType": "Displayed Candy",
+  "timeStamp": float,
+  "selectedCandy": string // Name of the png file for the selected candy
 }
 ```
 
@@ -100,10 +95,10 @@ Logging of each decision made by the Selector with a given batch of Candies.
 
 ```
 {
-  eventType: "Selector Categorize",
-  timeStamp: float,
-  selectedCandyCategory: string, 	// "Bitter" or "Sweet"
-  actualCandyCategory: string 	// "Bitter" or "Sweet"
+  "eventType": "Selector Categorize",
+  "timeStamp": float,
+  "selectedCandyCategory": string, 	// "Bitter" or "Sweet"
+  "actualCandyCategory": string 	// "Bitter" or "Sweet"
 }
 ```
 
@@ -112,8 +107,8 @@ Logging of when Selector finishes with their selection task for the current batc
 
 ```
 {
-  eventType: "Selector Finish",
-  timeStamp: float
+  "eventType": "Selector Finish",
+  "timeStamp": float
 }
 ```
 
@@ -122,9 +117,9 @@ Logging of when the Selector places a marker.
 
 ```
 {
-  eventType: "Marker Placed",
-  timeStamp: float,
-  markerPos: Vector3 // (x, y, z) position of marker
+  "eventType": "Marker Placed",
+  "timeStamp": float,
+  "markerPos": Vector3 // (x, y, z) position of marker
 }
 ```
 
@@ -133,8 +128,8 @@ Logging of when the Explorer reaches a marker.
 
 ```
 {
-  eventType: "Marker Reached",
-  timeStamp: float
+  "eventType": "Marker Reached",
+  "timeStamp": float
 }
 ```
 
@@ -143,9 +138,9 @@ Logging of when either player makes a request to leave.
 
 ```
 {
-  eventType: "Requested to Leave",
-  timeStamp: float,
-  playerType: string	// "Explorer" or "Selector"
+  "eventType": "Requested to Leave",
+  "timeStamp": float,
+  "playerType": string	// "Explorer" or "Selector"
 }
 ```
 
@@ -154,9 +149,9 @@ Logging of when either player responds to a request to leave.
 
 ```
 {
-  eventType: "Leave Response",
-  timeStamp: float,
-  response: string	// "Accept" or "Deny"
+  "eventType": "Leave Response",
+  "timeStamp": float,
+  "response": string	// "Accept" or "Deny"
 }
 ```
 
@@ -165,12 +160,12 @@ Logging of stats at the end of a game.
 
 ```
 {
-  eventType: "Game Summary",
-  timeStamp: float,
-  numBitterCorrect: int,
-  numBitterIncorrect: int,
-  numSweetCorrect: int,
-  numSweetIncorrect: int
+  "eventType": "Game Summary",
+  "timeStamp": float,
+  "numBitterCorrect": int,
+  "numBitterIncorrect": int,
+  "numSweetCorrect": int,
+  "numSweetIncorrect": int
 }
 ```
 
@@ -181,63 +176,63 @@ Currently, the plan is to communicate with Python over local TCP sockets (i.e. l
 The current structure of data is as follows:
 ```
 {
-  observation: {
-    explorer: {
-      position: Vector3,
-      scale: Vector3,
-      rotation: Vector4, // Quaternion
-      allowPlayerInput: bool, // NOT NEEDED: express through actions array
-      canInteract: bool // NOT NEEDED: express through actions array
+  "observation": {
+    "explorer": {
+      "position": Vector3,
+      "scale": Vector3,
+      "rotation": Vector4, // Quaternion
+      "allowPlayerInput": bool, // NOT NEEDED: express through actions array
+      "canInteract": bool // NOT NEEDED: express through actions array
     },
-    selector: {
-      position: Vector3,
-      allowPlayerInput: bool, // NOT NEEDED: express through actions array
+    "selector": {
+      "position": Vector3,
+      "allowPlayerInput": bool, // NOT NEEDED: express through actions array
       
       // TODO: when selector is in selection mode
-      candyImg: byte[]
+      "candyImg": byte[]
     },
-    neighborhoodData: [
+    "neighborhoodData": [
       {
-        houseData: [
+        "houseData": [
           {
-            position: Vector3,
-            scale: Vector3,
-            rotation: Vector4, // Quaternion
-            visited: bool,
-            mailboxColor: Vector4
+            "position": Vector3,
+            "scale": Vector3,
+            "rotation": Vector4, // Quaternion
+            "visited": bool,
+            "mailboxColor": Vector4
           },
           ...
         ],
-        numBitterCorrect: int,
-        numBitterIncorrect: int
+        "numBitterCorrect": int,
+        "numBitterIncorrect": int
       },
       ...
     ],
-    barrierData: [
+    "barrierData": [
       {
-        position: Vector3,
-        scale: Vector3,
-        rotation: Vector4, // Quaternion
+        "position": Vector3,
+        "scale": Vector3,
+        "rotation": Vector4, // Quaternion
       },
       ...
     ],
-    trapData: [
+    "trapData": [
       {
-        position: Vector3,
-        scale: Vector3,
-        rotation: Vector4, // Quaternion
+        "position": Vector3,
+        "scale": Vector3,
+        "rotation": Vector4, // Quaternion
       },
       ...
     ],
-    timeLeft: float,
-    scoring: {
-      numBitterCorrect: int,
-      numBitterIncorrect: int,
-      numSweetCorrect: int,
-      numSweetIncorrect: int
+    "timeLeft": float,
+    "scoring": {
+      "numBitterCorrect": int,
+      "numBitterIncorrect": int,
+      "numSweetCorrect": int,
+      "numSweetIncorrect": int
     }
   },
-  actions: int[] // Array of possible actions that can be taken
+  "actions": int[] // Array of possible actions that can be taken
 }
 ```
 Many parts of the above are static (barrier, house, and trap positions). These can be exported once at the beginning, then not needed again. For houses, we can export positions once, associate them with IDs, then only need to continuously output the ID and whether or not a house has been visited.

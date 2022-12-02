@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    
+    
+    <link rel="shortcut icon" href="../img/favicon.ico">
+
+    
+    <title>Data - BitterBuster Documentation</title>
+    
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/v4-shims.css">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hack-font@3.3.0/build/web/hack.min.css">
+    <link href='//rsms.me/inter/inter.css' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,600,700&subset=latin-ext,latin' rel='stylesheet' type='text/css'>
+    <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
+    <link href="../css/base.min.css" rel="stylesheet">
+    <link href="../css/cinder.min.css" rel="stylesheet">
+
+    
+        
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.18.0/build/styles/github.min.css">
+        
+    
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+            <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+        <![endif]-->
+
+    
+
+     
+</head>
+
+<body>
+
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            
+
+            <!-- Main title -->
+
+            
+              <a class="navbar-brand" href="..">BitterBuster Documentation</a>
+            
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+                <!-- Main navigation -->
+                <ul class="nav navbar-nav">
+                
+                
+                    <li >
+                        <a href="..">Home</a>
+                    </li>
+                
+                
+                
+                    <li class="active">
+                        <a href="./">Data</a>
+                    </li>
+                
+                
+                </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                            <i class="fas fa-search"></i> Search
+                        </a>
+                    </li>
+                    <li >
+                        <a rel="prev" href="..">
+                            <i class="fas fa-arrow-left"></i> Previous
+                        </a>
+                    </li>
+                    <li class="disabled">
+                        <a rel="next" >
+                            Next <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+    <div class="container">
+        
+        
+        <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+        <li class="first-level active"><a href="#bitterbuster-data-documentation">BitterBuster Data Documentation</a></li>
+            <li class="second-level"><a href="#overview">Overview</a></li>
+                
+            <li class="second-level"><a href="#logging">Logging</a></li>
+                
+                <li class="third-level"><a href="#event-types">Event Types</a></li>
+            <li class="second-level"><a href="#ai-input">AI Input</a></li>
+                
+                <li class="third-level"><a href="#game-state-data-wip">Game State Data [WIP]</a></li>
+                <li class="third-level"><a href="#screenshot">Screenshot</a></li>
+            <li class="second-level"><a href="#game-config-todo">Game Config [TODO]</a></li>
+                
+    </ul>
+</div></div>
+        <div class="col-md-9" role="main">
+
+<h1 id="bitterbuster-data-documentation">BitterBuster Data Documentation</h1>
+<h2 id="overview">Overview</h2>
+<p>This document provides the details and schema for the various data elements exported by the BitterBuster game. </p>
+<h2 id="logging">Logging</h2>
+<p>With each run of the game, data points are logged for each specific event that occurs within the gameplay. These are exported into a <code>json</code> file in the <code>Logs</code> directory created at the root working directory of the BitterBuster executable. The event log is an array of logging objects that each follow the general form:</p>
+<pre><code>{
+  &quot;eventType&quot;: string,
+  &quot;timeStamp&quot;: float,
+  &quot;data&quot;: [
+    {
+      &quot;key&quot;: string,
+      &quot;value&quot;: string
+    },
+    ...
+  ]
+}
+</code></pre>
+<p>Each different event is associated with a different set of key/value data pairs that can be parsed for data interpretation.</p>
+<p><em>Note:</em> Logging was written very early in development and hasn't been updated. The data array was used to bypass an earlier problem with logging, but each of them will be compressed to just be within the log event object itself as such:</p>
+<pre><code>{
+  &quot;eventType&quot;: string,
+  &quot;timeStamp&quot;: float,
+  &quot;key&quot;: value,
+  ...
+}
+</code></pre>
+<p>Some of the below events are still WIP and some need to be updated based on the new gameplay. </p>
+<h3 id="event-types">Event Types</h3>
+<h4 id="explorer-position">Explorer Position</h4>
+<p>Logging of Explorer position by the game every x seconds (current build sets this as 2, but this value will be adjustable in the final version)</p>
+<pre><code>{
+  &quot;eventType&quot;: &quot;Explorer Position&quot;,
+  &quot;timeStamp&quot;: float,
+  &quot;position&quot;: Vector3 // (x, y, z) position
+}
+</code></pre>
+<h4 id="enter-neighborhood">Enter Neighborhood</h4>
+<p>Logging of when the Explorer enters a neighborhood</p>
+<pre><code>{
+  &quot;eventType&quot;: &quot;Enter Neighborhood&quot;,
+  &quot;timeStamp&quot;: float
+}
+</code></pre>
+<h4 id="exit-neighborhood">Exit Neighborhood</h4>
+<p>Logging of when the Explorer leaves a neighborhood</p>
+<pre><code>{
+  &quot;eventType&quot;: &quot;Exit Neighborhood&quot;,
+  &quot;timeStamp&quot;: float
+}
+</code></pre>
+<h4 id="visited-house">Visited House</h4>
+<p>Logging of when the Explorer visits (interacts with) a House.</p>
+<pre><code>{
+  &quot;eventType&quot;: &quot;Visited House&quot;,
+  &quot;timeStamp&quot;: float,
+  &quot;houseBitterProb&quot;: float  // Probability of bitterness for given house
+}
+</code></pre>
+<h4 id="selector-shown-candy-wip">Selector Shown Candy [WIP]</h4>
+<p>Logging of when a Candy is displayed to the Selector</p>
+<pre><code>{
+  &quot;eventType&quot;: &quot;Displayed Candy&quot;,
+  &quot;timeStamp&quot;: float,
+  &quot;selectedCandy&quot;: string // Name of the png file for the selected candy
+}
+</code></pre>
+<h4 id="selector-categorize">Selector Categorize</h4>
+<p>Logging of each decision made by the Selector with a given batch of Candies.</p>
+<pre><code>{
+  &quot;eventType&quot;: &quot;Selector Categorize&quot;,
+  &quot;timeStamp&quot;: float,
+  &quot;selectedCandyCategory&quot;: string,  // &quot;Bitter&quot; or &quot;Sweet&quot;
+  &quot;actualCandyCategory&quot;: string     // &quot;Bitter&quot; or &quot;Sweet&quot;
+}
+</code></pre>
+<h4 id="selector-finish-wip">Selector Finish [WIP]</h4>
+<p>Logging of when Selector finishes with their selection task for the current batch.</p>
+<pre><code>{
+  &quot;eventType&quot;: &quot;Selector Finish&quot;,
+  &quot;timeStamp&quot;: float
+}
+</code></pre>
+<h4 id="marker-placed">Marker Placed</h4>
+<p>Logging of when the Selector places a marker.</p>
+<pre><code>{
+  &quot;eventType&quot;: &quot;Marker Placed&quot;,
+  &quot;timeStamp&quot;: float,
+  &quot;markerPos&quot;: Vector3 // (x, y, z) position of marker
+}
+</code></pre>
+<h4 id="marker-reached">Marker Reached</h4>
+<p>Logging of when the Explorer reaches a marker.</p>
+<pre><code>{
+  &quot;eventType&quot;: &quot;Marker Reached&quot;,
+  &quot;timeStamp&quot;: float
+}
+</code></pre>
+<h4 id="request-to-leave-wip">Request to Leave [WIP]</h4>
+<p>Logging of when either player makes a request to leave.</p>
+<pre><code>{
+  &quot;eventType&quot;: &quot;Requested to Leave&quot;,
+  &quot;timeStamp&quot;: float,
+  &quot;playerType&quot;: string  // &quot;Explorer&quot; or &quot;Selector&quot;
+}
+</code></pre>
+<h4 id="leave-response-wip">Leave Response [WIP]</h4>
+<p>Logging of when either player responds to a request to leave.</p>
+<pre><code>{
+  &quot;eventType&quot;: &quot;Leave Response&quot;,
+  &quot;timeStamp&quot;: float,
+  &quot;response&quot;: string    // &quot;Accept&quot; or &quot;Deny&quot;
+}
+</code></pre>
+<h4 id="game-summary-wip">Game Summary [WIP]</h4>
+<p>Logging of stats at the end of a game.</p>
+<pre><code>{
+  &quot;eventType&quot;: &quot;Game Summary&quot;,
+  &quot;timeStamp&quot;: float,
+  &quot;numBitterCorrect&quot;: int,
+  &quot;numBitterIncorrect&quot;: int,
+  &quot;numSweetCorrect&quot;: int,
+  &quot;numSweetIncorrect&quot;: int
+}
+</code></pre>
+<h2 id="ai-input">AI Input</h2>
+<p>Currently, the plan is to communicate with Python over local TCP sockets (i.e. localhost:12345). The game will intermittedly send over game state data (and potentially screenshot data) to the Python program over the socket, and will request for input back into the game.</p>
+<h3 id="game-state-data-wip">Game State Data [WIP]</h3>
+<p>The current structure of data is as follows:</p>
+<pre><code>{
+  &quot;observation&quot;: {
+    &quot;explorer&quot;: {
+      &quot;position&quot;: Vector3,
+      &quot;scale&quot;: Vector3,
+      &quot;rotation&quot;: Vector4, // Quaternion
+      &quot;allowPlayerInput&quot;: bool, // NOT NEEDED: express through actions array
+      &quot;canInteract&quot;: bool // NOT NEEDED: express through actions array
+    },
+    &quot;selector&quot;: {
+      &quot;position&quot;: Vector3,
+      &quot;allowPlayerInput&quot;: bool, // NOT NEEDED: express through actions array
+
+      // TODO: when selector is in selection mode
+      &quot;candyImg&quot;: byte[]
+    },
+    &quot;neighborhoodData&quot;: [
+      {
+        &quot;houseData&quot;: [
+          {
+            &quot;position&quot;: Vector3,
+            &quot;scale&quot;: Vector3,
+            &quot;rotation&quot;: Vector4, // Quaternion
+            &quot;visited&quot;: bool,
+            &quot;mailboxColor&quot;: Vector4
+          },
+          ...
+        ],
+        &quot;numBitterCorrect&quot;: int,
+        &quot;numBitterIncorrect&quot;: int
+      },
+      ...
+    ],
+    &quot;barrierData&quot;: [
+      {
+        &quot;position&quot;: Vector3,
+        &quot;scale&quot;: Vector3,
+        &quot;rotation&quot;: Vector4, // Quaternion
+      },
+      ...
+    ],
+    &quot;trapData&quot;: [
+      {
+        &quot;position&quot;: Vector3,
+        &quot;scale&quot;: Vector3,
+        &quot;rotation&quot;: Vector4, // Quaternion
+      },
+      ...
+    ],
+    &quot;timeLeft&quot;: float,
+    &quot;scoring&quot;: {
+      &quot;numBitterCorrect&quot;: int,
+      &quot;numBitterIncorrect&quot;: int,
+      &quot;numSweetCorrect&quot;: int,
+      &quot;numSweetIncorrect&quot;: int
+    }
+  },
+  &quot;actions&quot;: int[] // Array of possible actions that can be taken
+}
+</code></pre>
+<p>Many parts of the above are static (barrier, house, and trap positions). These can be exported once at the beginning, then not needed again. For houses, we can export positions once, associate them with IDs, then only need to continuously output the ID and whether or not a house has been visited.</p>
+<h3 id="screenshot">Screenshot</h3>
+<p>Screenshots can be captured for the game (which uses a 16:9 ratio). The size of the screenshot can be adjusted within Unity.</p>
+<h2 id="game-config-todo">Game Config [TODO]</h2>
+<p>A json file will be usable to configure various parts of the game - i.e. the bitterness distribution of each neighborhood, game round time, etc. This should make it easier to just upload settings for the game rather than having to fill out a settings page. Will update this as implementation progresses.</p></div>
+        
+        
+    </div>
+
+    
+      <footer class="col-md-12 text-center">
+          
+          
+            <hr>
+            <p>
+            <small>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</small>
+            </p>
+          
+
+          
+          
+      </footer>
+    
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="../js/bootstrap-3.0.3.min.js"></script>
+
+    
+    <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.18.0/build/highlight.min.js"></script>
+        
+                <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.18.0/build/languages/json.min.js"></script>
+        
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    <script>var base_url = ".."</script>
+    
+    <script src="../js/base.js"></script>
+    <script src="../search/main.js"></script>
+
+    <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+    </body>
+
+</html>
