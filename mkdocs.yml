@@ -7,3 +7,4 @@ theme:
 nav:
   - Home: index.md
   - Data: data.md
+  - Development: dev.md

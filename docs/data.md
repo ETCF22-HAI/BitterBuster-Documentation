@@ -7,37 +7,18 @@ title: Data Documentation
 This document provides the details and schema for the various data elements exported by the BitterBuster game. 
 
 ## Logging
-With each run of the game, data points are logged for each specific event that occurs within the gameplay. These are exported into a `json` file in the `Logs` directory created at the root working directory of the BitterBuster executable. The event log is an array of logging objects that each follow the general form:
+With each run of the game, data points are logged for each specific event that occurs within the gameplay. These are exported into a `json` file in the `Logs` directory created at the root working directory of the BitterBuster executable. The event log contains arrays of logging objects that each follow the general form:
 ```
 {
   "eventType": string,
   "timeStamp": float,
-  "data": [
-    {
-      "key": string,
-      "value": string
-    },
-    ...
-  ]
+  ...
 }
 ```
 
 Each different event is associated with a different set of key/value data pairs that can be parsed for data interpretation.
 
-*Note:* Logging was written very early in development and hasn't been updated. The data array was used to bypass an earlier problem with logging, but each of them will be compressed to just be within the log event object itself as such:
-```
-{
-  "eventType": string,
-  "timeStamp": float,
-  "key": value,
-  ...
-}
-```
-
-Some of the below events are still WIP and some need to be updated based on the new gameplay. 
-
-### Event Types
-#### Explorer Position
+### Explorer Position
 Logging of Explorer position by the game every x seconds (current build sets this as 2, but this value will be adjustable in the final version)
 
 ```
@@ -48,7 +29,7 @@ Logging of Explorer position by the game every x seconds (current build sets thi
 }
 ```
 
-#### Enter Neighborhood
+### Enter Neighborhood
 Logging of when the Explorer enters a neighborhood
 
 ```
@@ -58,7 +39,7 @@ Logging of when the Explorer enters a neighborhood
 }
 ```
 
-#### Exit Neighborhood
+### Exit Neighborhood
 Logging of when the Explorer leaves a neighborhood
 
 ```
@@ -68,7 +49,7 @@ Logging of when the Explorer leaves a neighborhood
 }
 ```
 
-#### Visited House
+### Visited House
 Logging of when the Explorer visits (interacts with) a House.
 
 ```
@@ -79,7 +60,7 @@ Logging of when the Explorer visits (interacts with) a House.
 }
 ```
 
-#### Selector Shown Candy [WIP]
+### Selector Shown Candy
 Logging of when a Candy is displayed to the Selector
 
 ```
@@ -90,7 +71,7 @@ Logging of when a Candy is displayed to the Selector
 }
 ```
 
-#### Selector Categorize
+### Selector Categorize
 Logging of each decision made by the Selector with a given batch of Candies.
 
 ```
@@ -102,7 +83,7 @@ Logging of each decision made by the Selector with a given batch of Candies.
 }
 ```
 
-#### Selector Finish [WIP]
+### Selector Finish
 Logging of when Selector finishes with their selection task for the current batch.
 
 ```
@@ -112,7 +93,7 @@ Logging of when Selector finishes with their selection task for the current batc
 }
 ```
 
-#### Marker Placed
+### Marker Placed
 Logging of when the Selector places a marker.
 
 ```
@@ -123,7 +104,7 @@ Logging of when the Selector places a marker.
 }
 ```
 
-#### Marker Reached
+### Marker Reached
 Logging of when the Explorer reaches a marker.
 
 ```
@@ -133,7 +114,7 @@ Logging of when the Explorer reaches a marker.
 }
 ```
 
-#### Request to Leave [WIP]
+### Request to Leave
 Logging of when either player makes a request to leave.
 
 ```
@@ -144,7 +125,7 @@ Logging of when either player makes a request to leave.
 }
 ```
 
-#### Leave Response [WIP]
+### Leave Response
 Logging of when either player responds to a request to leave.
 
 ```
@@ -155,7 +136,7 @@ Logging of when either player responds to a request to leave.
 }
 ```
 
-#### Game Summary [WIP]
+### Game Summary
 Logging of stats at the end of a game.
 
 ```
