@@ -1,14 +1,32 @@
 site_name: BitterBuster Documentation
 theme:
-  name: null
-  custom_dir: 'cinder'
-  hljs_languages:
-    - json
-    - bash
-    - python
+  name: material
+  custom_dir: overrides
+  favicon: img/favicon.ico
+  logo: img/favicon.ico
+  palette:
+    - scheme: default
+      primary: indigo
+      accent: orange
+      toggle:
+        icon: material/brightness-7 
+        name: Switch to dark mode
+
+    - scheme: slate
+      primary: indigo
+      accent: orange
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+
+  features:
+    - navigation.tabs
+    - navigation.top
+    - navigation.tracking
+    - toc.integrate
 
 extra_css:
-  - "css/style.css"
+  - css/style.css
 
 nav:
   - Home: index.md
