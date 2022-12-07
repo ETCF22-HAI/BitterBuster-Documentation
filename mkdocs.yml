@@ -4,7 +4,18 @@ theme:
   custom_dir: 'cinder'
   hljs_languages:
     - json
+    - bash
+    - python
+
+extra_css:
+  - "css/style.css"
+
 nav:
   - Home: index.md
-  - Data: data.md
-  - Development: dev.md
+  - Developer:
+    - BitterBuster: bitterbuster.md
+    - Candy Generator: candy_generator.md
+    - Data Schema: data.md
+  - User:
+    - BitterBuster Gameplay Guide: user_guide.md
+  - License: license.md
