@@ -29,6 +29,16 @@ Logging of Explorer position by the game every x seconds (current build sets thi
 }
 ```
 
+### Explorer Trapped
+Logging of when the Explorer is trapped in the game
+
+```
+{
+  "eventType": "Explorer Trapped",
+  "timeStamp": float
+}
+```
+
 ### Enter Neighborhood
 Logging of when the Explorer enters a neighborhood
 
