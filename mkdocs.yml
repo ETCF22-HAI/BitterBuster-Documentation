@@ -33,7 +33,10 @@ nav:
   - Developer:
     - BitterBuster: bitterbuster.md
     - Candy Generator: candy_generator.md
-    - Data Schema: data.md
+    - Data Schema: 
+      - Game Configuration: data_config.md
+      - Logging Data: data_logging.md
+      - AI Support: data_ai.md
   - User:
     - BitterBuster Gameplay Guide: user_guide.md
   - License: license.md

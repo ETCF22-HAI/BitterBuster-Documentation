@@ -1,12 +1,11 @@
 ---
-title: Data Documentation
+title: Logging Data
 ---
 
-# BitterBuster Data Documentation
+# BitterBuster Logging Data
 ## Overview
-This document provides the details and schema for the various data elements exported by the BitterBuster game. 
+This document provides the details and schema for the logging data exported by the BitterBuster game. 
 
-## Logging
 With each run of the game, data points are logged for each specific event that occurs within the gameplay. These are exported into a `json` file in the `Logs` directory created at the root working directory of the BitterBuster executable. The event log contains arrays of logging objects that each follow the general form:
 ```
 {
@@ -18,6 +17,7 @@ With each run of the game, data points are logged for each specific event that o
 
 Each different event is associated with a different set of key/value data pairs that can be parsed for data interpretation.
 
+## Logging Event Types
 ### Explorer Position
 Logging of Explorer position by the game every x seconds (current build sets this as 2, but this value will be adjustable in the final version)
 
@@ -45,7 +45,8 @@ Logging of when the Explorer enters a neighborhood
 ```
 {
   "eventType": "Enter Neighborhood",
-  "timeStamp": float
+  "timeStamp": float,
+  "neighborhoodBitterProb": float // Probability of bitterness for given neighborhood
 }
 ```
 
@@ -159,77 +160,3 @@ Logging of stats at the end of a game.
   "numSweetIncorrect": int
 }
 ```
-
-## AI Input
-Currently, the plan is to communicate with Python over local TCP sockets (i.e. localhost:12345). The game will intermittedly send over game state data (and potentially screenshot data) to the Python program over the socket, and will request for input back into the game.
-
-### Game State Data [WIP]
-The current structure of data is as follows:
-```
-{
-  "observation": {
-    "explorer": {
-      "position": Vector3,
-      "scale": Vector3,
-      "rotation": Vector4, // Quaternion
-      "allowPlayerInput": bool, // NOT NEEDED: express through actions array
-      "canInteract": bool // NOT NEEDED: express through actions array
-    },
-    "selector": {
-      "position": Vector3,
-      "allowPlayerInput": bool, // NOT NEEDED: express through actions array
-      
-      // TODO: when selector is in selection mode
-      "candyImg": byte[]
-    },
-    "neighborhoodData": [
-      {
-        "houseData": [
-          {
-            "position": Vector3,
-            "scale": Vector3,
-            "rotation": Vector4, // Quaternion
-            "visited": bool,
-            "mailboxColor": Vector4
-          },
-          ...
-        ],
-        "numBitterCorrect": int,
-        "numBitterIncorrect": int
-      },
-      ...
-    ],
-    "barrierData": [
-      {
-        "position": Vector3,
-        "scale": Vector3,
-        "rotation": Vector4, // Quaternion
-      },
-      ...
-    ],
-    "trapData": [
-      {
-        "position": Vector3,
-        "scale": Vector3,
-        "rotation": Vector4, // Quaternion
-      },
-      ...
-    ],
-    "timeLeft": float,
-    "scoring": {
-      "numBitterCorrect": int,
-      "numBitterIncorrect": int,
-      "numSweetCorrect": int,
-      "numSweetIncorrect": int
-    }
-  },
-  "actions": int[] // Array of possible actions that can be taken
-}
-```
-Many parts of the above are static (barrier, house, and trap positions). These can be exported once at the beginning, then not needed again. For houses, we can export positions once, associate them with IDs, then only need to continuously output the ID and whether or not a house has been visited.
-
-### Screenshot
-Screenshots can be captured for the game (which uses a 16:9 ratio). The size of the screenshot can be adjusted within Unity.
-
-## Game Config [TODO]
-A json file will be usable to configure various parts of the game - i.e. the bitterness distribution of each neighborhood, game round time, etc. This should make it easier to just upload settings for the game rather than having to fill out a settings page. Will update this as implementation progresses.
