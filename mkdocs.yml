@@ -31,7 +31,10 @@ extra_css:
 nav:
   - Home: index.md
   - Developer:
-    - BitterBuster: bitterbuster.md
+    - BitterBuster: 
+      - Installation: bitterbuster/installation.md
+      - Build: bitterbuster/build.md
+      - Implementation Details: bitterbuster/implementation.md
     - Candy Generator: candy_generator.md
     - Data Schema: 
       - Game Configuration: data_config.md

@@ -1,10 +1,10 @@
 ---
-title: BitterBuster Documentation
+title: BitterBuster Installation
 ---
 
-# BitterBuster Documentation
+# BitterBuster Installation
 ## Overview
-This document provides the details on how to set up a development environment for BitterBuster.
+This document provides the details on how to install and set up a development environment for BitterBuster.
 
 ## Setup
 ### Repository Link
@@ -48,10 +48,9 @@ In Unity, clicking on the "Run" button will start running the game from the curr
 
 As a shortcut, you can click on `Util -> Set Starting Scene` to automatically set the default starting scene to the "StartScreen" scene. This will need to be clicked once every time the editor is first opened.
 
-## Code Structure
-**WIP: To Be Filled**
+#### Play Mode
+To run a Unity game in the Editor, click on the Play button at the top of the window. This will automatically direct you to the game mode screen.
 
-## Building
-1. Click on File -> Build Settings to open the Build Settings window
-2. Select the desired platform for building (WebGL, Windows, Linux, Mac). If development logging is needed, check the "Development Build" box
-3. Click on "Build". This will open a window to select a folder to output the build, then start the build
+All of the UI was built for a 16:9 aspect ratio. You can use the dropdown at the top of the game screen to adjust the screen ratio.
+
+![](img/aspect_ratio.png)
