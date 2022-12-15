@@ -30,16 +30,15 @@ extra_css:
 
 nav:
   - Home: index.md
-  - Developer:
-    - BitterBuster: 
-      - Installation: bitterbuster/installation.md
-      - Build: bitterbuster/build.md
-      - Implementation Details: bitterbuster/implementation.md
-    - Candy Generator: candy_generator.md
+  - BitterBuster: 
+    - Installation: bitterbuster/installation.md
+    - Build: bitterbuster/build.md
+    - Implementation Details: bitterbuster/implementation.md
+    - User Guide [WIP]: bitterbuster/user_guide.md
     - Data Schema: 
-      - Game Configuration: data_config.md
-      - Logging Data: data_logging.md
-      - AI Support: data_ai.md
-  - User:
-    - BitterBuster Gameplay Guide: user_guide.md
+      - Game Configuration: bitterbuster/data/config.md
+      - Logging Data: bitterbuster/data/logging.md
+      - AI Support [WIP]: bitterbuster/data/ai.md
+  - Candy Generator: 
+    - Documentation: candygenerator/docs.md
   - License: license.md
