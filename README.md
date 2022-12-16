@@ -1,5 +1,7 @@
 # BitterBuster-Documentation
 
+This documentation website was created using [Material for MkDocs](https://squidfunk.github.io/mkdocs-material/)
+
 ## Local Development
 Install python, then run
 ```

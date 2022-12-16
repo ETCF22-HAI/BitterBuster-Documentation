@@ -6,3 +6,8 @@
 .md-typeset h2 {
     font-weight: bold;
 }
+
+.md-footer {
+    margin-top: 40px;
+    background-color: var(--md-primary-fg-color);
+}

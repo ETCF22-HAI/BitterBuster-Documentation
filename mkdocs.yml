@@ -28,13 +28,22 @@ theme:
 extra_css:
   - css/style.css
 
+markdown_extensions:
+  - attr_list
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
+  - def_list
+  - pymdownx.tasklist:
+      custom_checkbox: true
+
 nav:
   - Home: index.md
   - BitterBuster: 
     - Installation: bitterbuster/installation.md
     - Build: bitterbuster/build.md
     - Implementation Details: bitterbuster/implementation.md
-    - User Guide [WIP]: bitterbuster/user_guide.md
+    - Future Development: bitterbuster/future.md
     - Data Schema: 
       - Game Configuration: bitterbuster/data/config.md
       - Logging Data: bitterbuster/data/logging.md

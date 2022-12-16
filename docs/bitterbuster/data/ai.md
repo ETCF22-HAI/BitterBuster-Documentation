@@ -1,15 +1,15 @@
 ---
-title: AI Support
+title: AI Support [WIP]
 ---
 
 # BitterBuster AI Support
 ## Overview
-This document provides the details and schema for the various data elements that will be exported/expected as input for AI agent support by the BitterBuster game. 
-
-Currently, the plan is to communicate with Python over local TCP sockets (i.e. localhost:12345). The game will intermittedly send over game state data (and potentially screenshot data) to the Python program over the socket, and will request for input back into the game.
+This document provides the details and schema for the various data elements that will be exported/expected as input for AI agent support by the BitterBuster game.
 
 ## Game State Data [WIP]
-The current structure of data is as follows:
+The game state data is created through compiling all of serializable data from the different objects in the game. Each of these objects have a `Serialize` function that converts their fields into a JSON format, then all of the serialized data is compiled by the `GameManager`.
+
+The rough schema of what would be outputted is as follows:
 ```
 {
   "observation": {
@@ -74,4 +74,4 @@ The current structure of data is as follows:
 Many parts of the above are static (barrier, house, and trap positions). These can be exported once at the beginning, then not needed again. For houses, we can export positions once, associate them with IDs, then only need to continuously output the ID and whether or not a house has been visited.
 
 ## Screenshot
-Screenshots can be captured for the game (which uses a 16:9 ratio). The size of the screenshot can be adjusted within Unity.
+Screenshots can be captured for the game (which uses a 16:9 ratio). The size of the screenshot can be adjusted within Unity via the `CameraController` class.
